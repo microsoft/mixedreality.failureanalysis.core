@@ -1,4 +1,4 @@
-name: FailureAnalysis.Core Build
+name: FailureAnalysis Core Build
 on:
   push:
     branches:
