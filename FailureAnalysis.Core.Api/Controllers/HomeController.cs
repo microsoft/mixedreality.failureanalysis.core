@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FailureAnalysis.Core.Api.Controllers
 {
-    
     [ApiController]
     [Route("api/[controller]")]
     public class HomeController : ControllerBase
