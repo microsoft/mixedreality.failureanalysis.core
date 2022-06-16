@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
+using System.Collections.Generic;
 using ADotNet.Clients;
 using ADotNet.Models.Pipelines.GithubPipelines.DotNets;
 using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks;
@@ -9,7 +10,7 @@ using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks.SetupDotNetTaskV1s;
 
 var githubPipeline = new GithubPipeline
 {
-    Name = "FailureAnalysis.Core Build",
+    Name = "FailureAnalysis Core Build",
 
     OnEvents = new Events
     {
