@@ -12,12 +12,12 @@ namespace FailureAnalysis.Core.Api.Infrastructure.Provision.Brokers.Configuratio
     {
         public CloudManagementConfiguration GetConfiguration()
         {
-            IConfigurationRoot configrationRoot = new ConfigurationBuilder()
+            IConfigurationRoot configurationRoot = new ConfigurationBuilder()
                 .SetBasePath(basePath: Directory.GetCurrentDirectory())
                     .AddJsonFile(path: "appSettings.json", optional: false)
                         .Build();
 
-            return configrationRoot.Get<CloudManagementConfiguration>();
+            return configurationRoot.Get<CloudManagementConfiguration>();
         }
     }
 }
