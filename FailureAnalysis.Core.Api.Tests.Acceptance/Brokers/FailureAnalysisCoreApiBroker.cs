@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using RESTFulSense.Clients;
 
