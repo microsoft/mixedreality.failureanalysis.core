@@ -94,7 +94,6 @@ namespace FailureAnalysis.Core.Api.Infrastructure.Provision.Services.Foundations
                 Database = sqlDatabase,
                 ConnectionString = GenerateConnectionString(sqlDatabase)
             };
-
         }
 
         public async ValueTask<IWebApp> ProvisionWebAppAsync(
@@ -134,7 +133,6 @@ namespace FailureAnalysis.Core.Api.Infrastructure.Provision.Services.Foundations
             {
                 this.loggingBroker.LogActivity(message: $"Could not find {resourceGroupName}.");
             }
-
         }
 
         private string GenerateConnectionString(ISqlDatabase sqlDatabase)
