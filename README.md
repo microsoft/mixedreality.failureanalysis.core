@@ -1,4 +1,4 @@
-# Project
+# FailureAnalysis Core
 [![FailureAnalysis Core Build](https://github.com/microsoft/mixedreality.failureanalysis.core/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/microsoft/mixedreality.failureanalysis.core/actions/workflows/dotnet.yml?query=branch%3Amain)
 [![The Standard - COMPLIANT](https://img.shields.io/badge/The_Standard-COMPLIANT-2ea44f)](https://github.com/hassanhabib/The-Standard)
 
