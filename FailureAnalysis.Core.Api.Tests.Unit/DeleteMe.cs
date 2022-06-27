@@ -9,9 +9,7 @@ namespace FailureAnalysis.Core.Api.Tests.Unit
     public class DeleteMe
     {
         [Fact]
-        public void Test1()
-        {
+        public void ShouldBeTrue() =>
             Assert.True(true);
-        }
     }
 }
