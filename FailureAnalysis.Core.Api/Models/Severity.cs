@@ -6,10 +6,10 @@ namespace FailureAnalysis.Core.Api.Models
 {
     public enum Severity
     {
-       Critical,
-       Major,
-       Moderate,
-       Minor,
-       Cosmetic
+        Critical,
+        Major,
+        Moderate,
+        Minor,
+        Cosmetic
     }
 }
