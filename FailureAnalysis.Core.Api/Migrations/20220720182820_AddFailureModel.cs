@@ -27,6 +27,8 @@ namespace FailureAnalysis.Core.Api.Migrations
                     SprintName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FailureIdString = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FailureDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ErrorMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Source = table.Column<string>(type: "nvarchar(max)", nullable: false),

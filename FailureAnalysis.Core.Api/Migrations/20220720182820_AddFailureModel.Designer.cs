@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FailureAnalysis.Core.Api.Migrations
 {
     [DbContext(typeof(StorageBroker))]
-    [Migration("20220720172029_AddFailureModel")]
+    [Migration("20220720182820_AddFailureModel")]
     partial class AddFailureModel
     {
         /// <inheritdoc />
@@ -34,6 +34,9 @@ namespace FailureAnalysis.Core.Api.Migrations
                     b.Property<string>("AssignTo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -78,6 +81,9 @@ namespace FailureAnalysis.Core.Api.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 

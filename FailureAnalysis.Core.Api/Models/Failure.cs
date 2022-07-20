@@ -15,6 +15,8 @@ namespace FailureAnalysis.Core.Api.Models
         public string SprintName { get; set; }
         public string FailureIdString { get; set; }
         public DateTime? FailureDateTime { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset UpdatedDate { get; set; }
         public string Description { get; set; }
         public string ErrorMessage { get; set; }
         public string Source { get; set; }
