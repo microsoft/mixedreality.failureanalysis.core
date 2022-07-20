@@ -4,6 +4,7 @@
 
 using System.Text.Json.Serialization;
 using FailureAnalysis.Core.Api.Brokers;
+using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Microsoft.OpenApi.Models;
 
 namespace FailureAnalysis.Core.Api
@@ -23,6 +24,7 @@ namespace FailureAnalysis.Core.Api
             services.AddLogging();
             services.AddDbContext<StorageBroker>();
             AddBrokers(services);
+            AddServices(services);
 
             services.AddSwaggerGen(option =>
             {
@@ -58,5 +60,8 @@ namespace FailureAnalysis.Core.Api
         }
         private void AddBrokers(IServiceCollection services) =>
             services.AddTransient<IStorageBroker, StorageBroker>();
+
+        private void AddServices(IServiceCollection services) =>
+            services.AddTransient<IFailureService, FailureService>();
     }
 }
