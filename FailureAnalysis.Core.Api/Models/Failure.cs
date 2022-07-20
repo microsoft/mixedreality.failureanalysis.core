@@ -20,8 +20,5 @@ namespace FailureAnalysis.Core.Api.Models
         public string Source { get; set; }
         public Priority Priority { get; set; }
         public Severity Severity { get; set; }
-        public ProductInfo ProductInfo { get; set; }
-        public FailureFile[] AssociatedFiles { get; set; }
-        public Dictionary<string, string> CustomDimensions { get; set; }
     }
 }
