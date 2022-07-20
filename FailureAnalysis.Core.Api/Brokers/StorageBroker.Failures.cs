@@ -1,4 +1,8 @@
-﻿using FailureAnalysis.Core.Api.Models;
+﻿// ---------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// ---------------------------------------------------------------
+
+using FailureAnalysis.Core.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FailureAnalysis.Core.Api.Brokers
