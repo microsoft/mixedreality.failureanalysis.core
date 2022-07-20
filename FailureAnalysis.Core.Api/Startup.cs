@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using System.Text.Json.Serialization;
+using FailureAnalysis.Core.Api.Brokers;
 using Microsoft.OpenApi.Models;
 
 namespace FailureAnalysis.Core.Api
@@ -20,6 +21,8 @@ namespace FailureAnalysis.Core.Api
 
             services.AddHttpClient();
             services.AddLogging();
+            services.AddDbContext<StorageBroker>();
+            AddBrokers(services);
 
             services.AddSwaggerGen(option =>
             {
@@ -53,5 +56,7 @@ namespace FailureAnalysis.Core.Api
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
+        private void AddBrokers(IServiceCollection services) =>
+            services.AddTransient<IStorageBroker, StorageBroker>();
     }
 }
