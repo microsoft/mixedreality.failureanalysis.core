@@ -6,7 +6,7 @@ namespace FailureAnalysis.Core.Api.Models
 {
     public enum Priority
     {
-        VeryHigh,
+        Critical,
         High,
         Medium,
         Low,
