@@ -24,8 +24,5 @@ namespace FailureAnalysis.Core.Api.Brokers
 
             optionsBuilder.UseSqlServer(connectionString);
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-            ConfigureFailure(modelBuilder);
     }
 }
