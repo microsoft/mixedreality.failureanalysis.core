@@ -69,5 +69,8 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
 
         private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
             actualException => actualException.SameExceptionAs(expectedException);
+
+        private static string GetRandomMessage() =>
+            new MnemonicString().GetValue();
     }
 }
