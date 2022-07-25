@@ -65,11 +65,11 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             // given
             var someFailure = CreateRandomFailure();
             string randomMessage = GetRandomMessage();
-            
+
             var duplicateKeyException =
                 new DuplicateKeyException(randomMessage);
 
-            var alreadyExistsFailureException = 
+            var alreadyExistsFailureException =
                 new AlreadyExistsFailureException(duplicateKeyException);
 
             var expectedFailureDependencyValidationException =
@@ -156,8 +156,8 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             var failedFailureServiceException =
                 new FailedFailureServiceException(exception);
 
-             var expectedFailureServiceException =
-                new FailureServiceException(failedFailureServiceException);
+            var expectedFailureServiceException =
+               new FailureServiceException(failedFailureServiceException);
 
             this.storageBrokerMock.Setup(broker =>
                 broker.InsertFailureAsync(It.IsAny<Failure>()))

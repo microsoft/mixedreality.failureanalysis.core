@@ -2,7 +2,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-using System;
 using System.Threading.Tasks;
 using FailureAnalysis.Core.Api.Models.Failures;
 using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
@@ -152,7 +151,7 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
         }
 
         [Fact]
-        public async Task 
+        public async Task
             ShouldThrowFailureValidationExceptionOnAddIfFailureSeverityOrPriorityIsInvalidAndLogItAsync()
         {
             // given
@@ -171,7 +170,7 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
                 key: nameof(Failure.Priority),
                 values: "Value is not recognized");
 
-            var expectedFailureValidationException = 
+            var expectedFailureValidationException =
                 new FailureValidationException(invalidFailureException);
 
             // when

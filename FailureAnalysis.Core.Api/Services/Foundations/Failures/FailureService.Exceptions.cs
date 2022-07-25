@@ -37,7 +37,7 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             }
             catch (DuplicateKeyException duplicateKeyException)
             {
-                var alreadyExistsFailureException = 
+                var alreadyExistsFailureException =
                     new AlreadyExistsFailureException(duplicateKeyException);
 
                 throw CreateAndLogDependencyValidationException(alreadyExistsFailureException);
@@ -61,7 +61,7 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
         private Exception CreateAndLogDependencyException(
             FailedFailureStorageException failedFailureStorageException)
         {
-            var failureDependencyException = 
+            var failureDependencyException =
                 new FailureDependencyException(failedFailureStorageException);
 
             this.loggingBroker.LogError(failureDependencyException);
@@ -72,7 +72,7 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
         private Exception CreateAndLogCriticalDependencyException(
             FailedFailureStorageException failedFailureStorageException)
         {
-            var failureDependencyException = 
+            var failureDependencyException =
                 new FailureDependencyException(failedFailureStorageException);
 
             this.loggingBroker.LogCritical(failureDependencyException);

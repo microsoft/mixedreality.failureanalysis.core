@@ -2,8 +2,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
 using FailureAnalysis.Core.Api.Models.Failures;
+using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {
@@ -75,7 +75,7 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 
             foreach (var validation in validations)
             {
-                if(validation.Rule.Condition)
+                if (validation.Rule.Condition)
                 {
                     invalidFailureException.UpsertDataList(
                         key: validation.Parameter,
