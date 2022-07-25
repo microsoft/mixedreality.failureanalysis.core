@@ -6,6 +6,7 @@ using EFxceptions.Models.Exceptions;
 using FailureAnalysis.Core.Api.Models;
 using FailureAnalysis.Core.Api.Models.Exceptions;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Xeptions;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
@@ -35,15 +36,37 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             }
             catch (DuplicateKeyException duplicateKeyException)
             {
-                var alreadyExistsFailureException = new AlreadyExistsFailureException(duplicateKeyException);
+                var alreadyExistsFailureException = 
+                    new AlreadyExistsFailureException(duplicateKeyException);
 
                 throw CreateAndLogDependencyValidationException(alreadyExistsFailureException);
             }
+            catch (DbUpdateException dbUpdateException)
+            {
+                var failedFailureStorageException =
+                    new FailedFailureStorageException(dbUpdateException);
+
+                throw CreateAndLogDependencyException(failedFailureStorageException);
+            }
         }
 
-        private Exception CreateAndLogCriticalDependencyException(FailedFailureStorageException failedFailureStorageException)
+        private Exception CreateAndLogDependencyException(
+            FailedFailureStorageException failedFailureStorageException)
         {
-            var failureDependencyException = new FailureDependencyException(failedFailureStorageException);
+            var failureDependencyException = 
+                new FailureDependencyException(failedFailureStorageException);
+
+            this.loggingBroker.LogError(failureDependencyException);
+
+            return failureDependencyException;
+        }
+
+        private Exception CreateAndLogCriticalDependencyException(
+            FailedFailureStorageException failedFailureStorageException)
+        {
+            var failureDependencyException = 
+                new FailureDependencyException(failedFailureStorageException);
+
             this.loggingBroker.LogCritical(failureDependencyException);
 
             return failureDependencyException;
