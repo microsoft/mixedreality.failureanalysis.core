@@ -8,8 +8,8 @@ namespace FailureAnalysis.Core.Api.Models.Failures.Exceptions
 {
     public class NullFailureException : Xeption
     {
-        public NullFailureException() :
-            base(message: "Failure is Null.")
+        public NullFailureException()
+            : base(message: "Failure is Null.")
         { }
     }
 }

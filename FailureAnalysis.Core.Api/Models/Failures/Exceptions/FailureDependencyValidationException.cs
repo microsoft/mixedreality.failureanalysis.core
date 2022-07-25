@@ -8,8 +8,8 @@ namespace FailureAnalysis.Core.Api.Models.Failures.Exceptions
 {
     public class FailureDependencyValidationException : Xeption
     {
-        public FailureDependencyValidationException(Xeption innerException) :
-            base(message:"Failure dependency validation exception occurred, contact support",
+        public FailureDependencyValidationException(Xeption innerException)
+            : base(message:"Failure dependency validation exception occurred, contact support",
                 innerException)
         { }
     }
