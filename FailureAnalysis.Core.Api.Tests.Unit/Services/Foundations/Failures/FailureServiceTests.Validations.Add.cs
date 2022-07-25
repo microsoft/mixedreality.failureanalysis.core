@@ -2,8 +2,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-using System;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FailureAnalysis.Core.Api.Models;
 using FailureAnalysis.Core.Api.Models.Exceptions;
@@ -39,11 +37,11 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedFailureValidationException))),
-                        Times.Once());
+                        Times.Once);
 
             this.storageBrokerMock.Verify(broker =>
                 broker.InsertFailureAsync(It.IsAny<Failure>()),
-                    Times.Never());
+                    Times.Never);
 
             this.storageBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();

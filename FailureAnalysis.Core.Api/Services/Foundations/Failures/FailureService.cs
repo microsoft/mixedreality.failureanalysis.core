@@ -8,7 +8,7 @@ using FailureAnalysis.Core.Api.Models;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {
-    public class FailureService : IFailureService
+    public partial class FailureService : IFailureService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -21,7 +21,12 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<Failure> AddFailureAsync(Failure failure) =>
-            await this.storageBroker.InsertFailureAsync(failure);
+        public ValueTask<Failure> AddFailureAsync(Failure failure) =>
+        TryCatch(async () =>
+        {
+            ValidateFailureOnAdd(failure);
+
+            return await this.storageBroker.InsertFailureAsync(failure);
+        });
     }
 }
