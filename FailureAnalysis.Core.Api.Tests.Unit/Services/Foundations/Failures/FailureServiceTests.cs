@@ -4,11 +4,13 @@
 
 using System;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using FailureAnalysis.Core.Api.Brokers;
 using FailureAnalysis.Core.Api.Brokers.Loggings;
 using FailureAnalysis.Core.Api.Models;
 using FailureAnalysis.Core.Api.Models.Exceptions;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
+using Microsoft.Data.SqlClient;
 using Moq;
 using Tynamix.ObjectFiller;
 using Xeptions;
@@ -58,6 +60,9 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             static int GetRandomNumber() =>
                 new IntRange(min: int.MinValue, max: int.MaxValue).GetValue();
         }
+
+        private static SqlException GetSqlException() =>
+            (SqlException)FormatterServices.GetUninitializedObject(typeof(SqlException));
 
         private static DateTimeOffset GetRandomDateTimeOffset() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
