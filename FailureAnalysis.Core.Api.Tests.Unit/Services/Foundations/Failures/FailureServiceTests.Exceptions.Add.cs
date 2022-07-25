@@ -63,7 +63,9 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             // given
             var someFailure = CreateRandomFailure();
             string randomMessage = GetRandomMessage();
-            var duplicateKeyException = new DuplicateKeyException(randomMessage);
+            
+            var duplicateKeyException =
+                new DuplicateKeyException(randomMessage);
 
             var alreadyExistsFailureException = 
                 new AlreadyExistsFailureException(duplicateKeyException);
@@ -79,8 +81,8 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             ValueTask<Failure> addFailureTask =
                 this.failureService.AddFailureAsync(someFailure);
 
-            FailureDependencyValidationException actualFailureDependencyValidationException
-                = await Assert.ThrowsAsync<FailureDependencyValidationException>(addFailureTask.AsTask);
+            FailureDependencyValidationException actualFailureDependencyValidationException =
+                await Assert.ThrowsAsync<FailureDependencyValidationException>(addFailureTask.AsTask);
 
             // then
             actualFailureDependencyValidationException.Should().BeEquivalentTo(
