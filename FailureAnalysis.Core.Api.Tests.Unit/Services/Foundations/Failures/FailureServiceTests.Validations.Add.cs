@@ -150,5 +150,52 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task 
+            ShouldThrowFailureValidationExceptionOnAddIfFailureSeverityOrPriorityIsInvalidAndLogItAsync()
+        {
+            // given
+            Failure randomFailure = CreateRandomFailure();
+            var invalidFailure = randomFailure;
+            invalidFailure.Severity = GetInvalidEnum<Severity>();
+            invalidFailure.Priority = GetInvalidEnum<Priority>();
+
+            var invalidFailureException = new InvalidFailureException();
+
+            invalidFailureException.AddData(
+                key: nameof(Failure.Severity),
+                values: "Value is not recognized");
+
+            invalidFailureException.AddData(
+                key: nameof(Failure.Priority),
+                values: "Value is not recognized");
+
+            var expectedFailureValidationException = 
+                new FailureValidationException(invalidFailureException);
+
+            // when
+            ValueTask<Failure> addFailureTask =
+                this.failureService.AddFailureAsync(invalidFailure);
+
+            FailureValidationException actualFailureValidationException =
+                await Assert.ThrowsAsync<FailureValidationException>(addFailureTask.AsTask);
+
+            // then
+            actualFailureValidationException.Should().BeEquivalentTo(
+                expectedFailureValidationException);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedFailureValidationException))),
+                        Times.Once);
+
+            this.storageBrokerMock.Verify(broker =>
+            broker.InsertFailureAsync(It.IsAny<Failure>()),
+                Times.Never);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.storageBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }

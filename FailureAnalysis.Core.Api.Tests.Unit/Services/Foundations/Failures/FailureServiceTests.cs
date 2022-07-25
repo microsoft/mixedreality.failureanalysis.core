@@ -44,6 +44,21 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             return filler;
         }
 
+        private static T GetInvalidEnum<T>()
+        {
+            int randomNumber = GetRandomNumber();
+
+            while(Enum.IsDefined(typeof(T), randomNumber))
+            {
+                randomNumber = GetRandomNumber();
+            }
+
+            return (T)(object) randomNumber;
+
+            static int GetRandomNumber() =>
+                new IntRange(min: int.MinValue, max: int.MaxValue).GetValue();
+        }
+
         private static DateTimeOffset GetRandomDateTimeOffset() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
