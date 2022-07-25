@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
+using System;
 using System.Threading.Tasks;
 using EFxceptions.Models.Exceptions;
 using FailureAnalysis.Core.Api.Models;
@@ -139,6 +140,47 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedFailureDependencyException))),
+                        Times.Once);
+
+            this.storageBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async void ShouldThrowServiceExceptionOnAddIfServiceErrorOccurredAndLogItAsync()
+        {
+            // given
+            Failure someFailure = CreateRandomFailure();
+            var exception = new Exception();
+
+            var failedFailureServiceException =
+                new FailedFailureServiceException(exception);
+
+             var expectedFailureServiceException =
+                new FailureServiceException(failedFailureServiceException);
+
+            this.storageBrokerMock.Setup(broker =>
+                broker.InsertFailureAsync(It.IsAny<Failure>()))
+                    .ThrowsAsync(exception);
+
+            // when
+            ValueTask<Failure> addFailureTask =
+                this.failureService.AddFailureAsync(someFailure);
+
+            FailureServiceException actualFailureServiceException =
+                await Assert.ThrowsAsync<FailureServiceException>(addFailureTask.AsTask);
+
+            // then
+            actualFailureServiceException.Should().BeEquivalentTo(
+                expectedFailureServiceException);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.InsertFailureAsync(someFailure),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedFailureServiceException))),
                         Times.Once);
 
             this.storageBrokerMock.VerifyNoOtherCalls();

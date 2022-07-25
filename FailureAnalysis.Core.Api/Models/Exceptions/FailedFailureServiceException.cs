@@ -6,11 +6,11 @@ using Xeptions;
 
 namespace FailureAnalysis.Core.Api.Models.Exceptions
 {
-    public class AlreadyExistsFailureException : Xeption
+    public class FailedFailureServiceException : Xeption
     {
-        public AlreadyExistsFailureException(Exception innerException) :
-            base(message: "Failure with same Id already exists",
-                innerException)
+        public FailedFailureServiceException(Exception exception)
+            : base(message: "Failed failure service exception occurred, contact support",
+                  exception)
         { }
     }
 }
