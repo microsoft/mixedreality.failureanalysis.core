@@ -4,7 +4,7 @@
 
 using Xeptions;
 
-namespace FailureAnalysis.Core.Api.Models.Exceptions
+namespace FailureAnalysis.Core.Api.Models.Failures.Exceptions
 {
     public class InvalidFailureException : Xeption
     {

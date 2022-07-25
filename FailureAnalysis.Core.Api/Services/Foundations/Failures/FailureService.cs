@@ -4,7 +4,7 @@
 
 using FailureAnalysis.Core.Api.Brokers;
 using FailureAnalysis.Core.Api.Brokers.Loggings;
-using FailureAnalysis.Core.Api.Models;
+using FailureAnalysis.Core.Api.Models.Failures;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {

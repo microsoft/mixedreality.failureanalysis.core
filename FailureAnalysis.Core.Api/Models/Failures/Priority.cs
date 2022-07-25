@@ -2,14 +2,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-namespace FailureAnalysis.Core.Api.Models
+namespace FailureAnalysis.Core.Api.Models.Failures
 {
-    public enum Severity
+    public enum Priority
     {
         Critical,
-        Major,
-        Moderate,
-        Minor,
-        Cosmetic
+        VeryHigh,
+        High,
+        Medium,
+        Low,
     }
 }

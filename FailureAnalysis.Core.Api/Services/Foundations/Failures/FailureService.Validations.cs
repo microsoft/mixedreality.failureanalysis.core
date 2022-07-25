@@ -2,8 +2,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-using FailureAnalysis.Core.Api.Models;
-using FailureAnalysis.Core.Api.Models.Exceptions;
+using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
+using FailureAnalysis.Core.Api.Models.Failures;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {

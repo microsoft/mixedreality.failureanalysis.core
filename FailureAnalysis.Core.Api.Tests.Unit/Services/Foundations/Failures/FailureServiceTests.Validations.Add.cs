@@ -4,8 +4,8 @@
 
 using System;
 using System.Threading.Tasks;
-using FailureAnalysis.Core.Api.Models;
-using FailureAnalysis.Core.Api.Models.Exceptions;
+using FailureAnalysis.Core.Api.Models.Failures;
+using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
 using FluentAssertions;
 using Moq;
 using Xunit;

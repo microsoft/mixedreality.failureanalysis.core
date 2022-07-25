@@ -4,12 +4,12 @@
 
 using Xeptions;
 
-namespace FailureAnalysis.Core.Api.Models.Exceptions
+namespace FailureAnalysis.Core.Api.Models.Failures.Exceptions
 {
-    public class FailedFailureStorageException : Xeption
+    public class FailureDependencyException : Xeption
     {
-        public FailedFailureStorageException(Exception innerException)
-            : base(message: "Failed failure storage error occurred, please contact support.",
+        public FailureDependencyException(Xeption innerException)
+            : base(message: "Failure dependency error occurred, please contact support.",
                   innerException)
         { }
     }

@@ -7,8 +7,7 @@ using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using FailureAnalysis.Core.Api.Brokers;
 using FailureAnalysis.Core.Api.Brokers.Loggings;
-using FailureAnalysis.Core.Api.Models;
-using FailureAnalysis.Core.Api.Models.Exceptions;
+using FailureAnalysis.Core.Api.Models.Failures;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Microsoft.Data.SqlClient;
 using Moq;
@@ -50,12 +49,12 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
         {
             int randomNumber = GetRandomNumber();
 
-            while(Enum.IsDefined(typeof(T), randomNumber))
+            while (Enum.IsDefined(typeof(T), randomNumber))
             {
                 randomNumber = GetRandomNumber();
             }
 
-            return (T)(object) randomNumber;
+            return (T)(object)randomNumber;
 
             static int GetRandomNumber() =>
                 new IntRange(min: int.MinValue, max: int.MaxValue).GetValue();

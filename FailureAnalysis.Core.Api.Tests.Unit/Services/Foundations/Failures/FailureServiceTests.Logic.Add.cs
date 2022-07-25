@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------
 
 using System.Threading.Tasks;
-using FailureAnalysis.Core.Api.Models;
+using FailureAnalysis.Core.Api.Models.Failures;
 using FluentAssertions;
 using Force.DeepCloner;
 using Moq;
