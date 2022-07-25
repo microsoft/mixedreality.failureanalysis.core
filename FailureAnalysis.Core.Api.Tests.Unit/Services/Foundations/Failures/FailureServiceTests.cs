@@ -3,12 +3,15 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Linq.Expressions;
 using FailureAnalysis.Core.Api.Brokers;
 using FailureAnalysis.Core.Api.Brokers.Loggings;
 using FailureAnalysis.Core.Api.Models;
+using FailureAnalysis.Core.Api.Models.Exceptions;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Moq;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
 {
@@ -43,5 +46,8 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
 
         private static DateTimeOffset GetRandomDateTimeOffset() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
+
+        private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
+            actualException => actualException.SameExceptionAs(expectedException);
     }
 }
