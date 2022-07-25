@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
+using EFxceptions.Models.Exceptions;
 using FailureAnalysis.Core.Api.Models;
 using FailureAnalysis.Core.Api.Models.Exceptions;
 using Microsoft.Data.SqlClient;
@@ -32,6 +33,12 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 
                 throw CreateAndLogCriticalDependencyException(failedFailureStorageException);
             }
+            catch (DuplicateKeyException duplicateKeyException)
+            {
+                var alreadyExistsFailureException = new AlreadyExistsFailureException(duplicateKeyException);
+
+                throw CreateAndLogDependencyValidationException(alreadyExistsFailureException);
+            }
         }
 
         private Exception CreateAndLogCriticalDependencyException(FailedFailureStorageException failedFailureStorageException)
@@ -48,6 +55,14 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             this.loggingBroker.LogError(exception: failureValidationException);
 
             return failureValidationException;
+        }
+
+        private FailureDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
+        {
+            var failureDependencyValidationException = new FailureDependencyValidationException(exception);
+            this.loggingBroker.LogError(exception: failureDependencyValidationException);
+
+            return failureDependencyValidationException;
         }
     }
 }
