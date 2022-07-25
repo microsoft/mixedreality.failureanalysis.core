@@ -26,7 +26,17 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
                 (Rule: IsInvalid(failure.UpdatedDate), Parameter: nameof(Failure.UpdatedDate)),
                 (Rule: IsInvalid(failure.Description), Parameter: nameof(Failure.Description)),
                 (Rule: IsInvalid(failure.ErrorMessage), Parameter: nameof(Failure.ErrorMessage)),
-                (Rule: IsInvalid(failure.Source), Parameter: nameof(Failure.Source)));
+                (Rule: IsInvalid(failure.Source), Parameter: nameof(Failure.Source)),
+                (Rule: IsInvalid(failure.Priority), Parameter: nameof(Failure.Priority)),
+                (Rule: IsInvalid(failure.Severity), Parameter: nameof(Failure.Severity)));
+        }
+
+        private void ValidateFailureIsNotNull(Failure failure)
+        {
+            if (failure is null)
+            {
+                throw new NullFailureException();
+            }
         }
 
         private static dynamic IsInvalid(string text) => new
@@ -47,13 +57,17 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             Message = "Date is required"
         };
 
-        private void ValidateFailureIsNotNull(Failure failure)
+        private static dynamic IsInvalid(Priority priority) => new
         {
-            if(failure is null)
-            {
-                throw new NullFailureException();
-            }
-        }
+            Condition = Enum.IsDefined(priority) is false,
+            Message = "Value is not recognized"
+        };
+
+        private static dynamic IsInvalid(Severity severity) => new
+        {
+            Condition = Enum.IsDefined(severity) is false,
+            Message = "Value is not recognized"
+        };
 
         private static void Validate(params (dynamic Rule, string Parameter)[] validations)
         {
