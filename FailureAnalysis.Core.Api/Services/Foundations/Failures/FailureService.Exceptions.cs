@@ -30,7 +30,8 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             }
             catch (SqlException sqlException)
             {
-                var failedFailureStorageException = new FailedFailureStorageException(sqlException);
+                var failedFailureStorageException =
+                    new FailedFailureStorageException(sqlException);
 
                 throw CreateAndLogCriticalDependencyException(failedFailureStorageException);
             }
@@ -47,6 +48,13 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
                     new FailedFailureStorageException(dbUpdateException);
 
                 throw CreateAndLogDependencyException(failedFailureStorageException);
+            }
+            catch (Exception exception)
+            {
+                var failedFailureServiceException =
+                    new FailedFailureServiceException(exception);
+
+                throw CreateAndLogServiceException(failedFailureServiceException);
             }
         }
 
@@ -87,5 +95,15 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 
             return failureDependencyValidationException;
         }
+
+        private FailureServiceException CreateAndLogServiceException(Xeption exception)
+        {
+            var failureServiceException = new FailureServiceException(exception);
+            this.loggingBroker.LogError(failureServiceException);
+
+            return failureServiceException;
+        }
+
+
     }
 }
