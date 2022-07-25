@@ -21,6 +21,10 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             {
                 throw CreateAndLogValidationException(nullFailureException);
             }
+            catch (InvalidFailureException invalidFailureException)
+            {
+                throw CreateAndLogValidationException(invalidFailureException);
+            }
         }
 
         private FailureValidationException CreateAndLogValidationException(Xeption exception)
