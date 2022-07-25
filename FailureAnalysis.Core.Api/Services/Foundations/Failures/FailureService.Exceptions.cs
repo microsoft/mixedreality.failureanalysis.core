@@ -4,6 +4,7 @@
 
 using FailureAnalysis.Core.Api.Models;
 using FailureAnalysis.Core.Api.Models.Exceptions;
+using Microsoft.Data.SqlClient;
 using Xeptions;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
@@ -25,6 +26,20 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             {
                 throw CreateAndLogValidationException(invalidFailureException);
             }
+            catch (SqlException sqlException)
+            {
+                var failedFailureStorageException = new FailedFailureStorageException(sqlException);
+
+                throw CreateAndLogCriticalDependencyException(failedFailureStorageException);
+            }
+        }
+
+        private Exception CreateAndLogCriticalDependencyException(FailedFailureStorageException failedFailureStorageException)
+        {
+            var failureDependencyException = new FailureDependencyException(failedFailureStorageException);
+            this.loggingBroker.LogCritical(failureDependencyException);
+
+            return failureDependencyException;
         }
 
         private FailureValidationException CreateAndLogValidationException(Xeption exception)
