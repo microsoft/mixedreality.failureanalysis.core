@@ -4,6 +4,7 @@
 
 using System.Text.Json.Serialization;
 using FailureAnalysis.Core.Api.Brokers;
+using FailureAnalysis.Core.Api.Brokers.Loggings;
 using Microsoft.OpenApi.Models;
 
 namespace FailureAnalysis.Core.Api
@@ -56,7 +57,10 @@ namespace FailureAnalysis.Core.Api
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
-        private void AddBrokers(IServiceCollection services) =>
+        private void AddBrokers(IServiceCollection services)
+        {
             services.AddTransient<IStorageBroker, StorageBroker>();
+            services.AddTransient<ILoggingBroker, LoggingBroker>();
+        }
     }
 }
