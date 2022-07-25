@@ -21,9 +21,7 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Failure> AddFailureAsync(Failure failure)
-        {
-            throw new NotImplementedException();
-        }
+        public async ValueTask<Failure> AddFailureAsync(Failure failure) =>
+            await this.storageBroker.InsertFailureAsync(failure);
     }
 }
