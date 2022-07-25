@@ -8,6 +8,7 @@ using FailureAnalysis.Core.Api.Models;
 using FailureAnalysis.Core.Api.Models.Exceptions;
 using FluentAssertions;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
@@ -95,6 +96,49 @@ namespace FailureAnalysis.Core.Api.Tests.Unit.Services.Foundations.Failures
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedFailureDependencyValidationException))),
+                        Times.Once);
+
+            this.storageBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task ShouldThrowDependencyExceptionOnAddIfDbUpdateErrorsOccursAndLogItAsync()
+        {
+            // given
+            Failure someFailure = CreateRandomFailure();
+
+            var dbUpdateException =
+                new DbUpdateException();
+
+            var failedFailureStorageException =
+                new FailedFailureStorageException(dbUpdateException);
+
+            var expectedFailureDependencyException =
+                new FailureDependencyException(failedFailureStorageException);
+
+            this.storageBrokerMock.Setup(broker =>
+                broker.InsertFailureAsync(It.IsAny<Failure>()))
+                    .ThrowsAsync(dbUpdateException);
+
+            // when
+            ValueTask<Failure> addFailureTask = this.failureService.AddFailureAsync(someFailure);
+
+            FailureDependencyException actualFailureDependencyException =
+                await Assert.ThrowsAsync<FailureDependencyException>(
+                    addFailureTask.AsTask);
+
+            // then
+            actualFailureDependencyException.Should().BeEquivalentTo(
+                expectedFailureDependencyException);
+
+            this.storageBrokerMock.Verify(broker =>
+                broker.InsertFailureAsync(It.IsAny<Failure>()),
+                        Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedFailureDependencyException))),
                         Times.Once);
 
             this.storageBrokerMock.VerifyNoOtherCalls();
