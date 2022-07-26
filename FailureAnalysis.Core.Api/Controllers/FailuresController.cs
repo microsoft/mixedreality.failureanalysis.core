@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-using FailureAnalysis.Core.Api.Models;
+using FailureAnalysis.Core.Api.Models.Failures;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
