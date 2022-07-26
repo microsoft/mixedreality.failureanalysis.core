@@ -1,9 +1,10 @@
-﻿// ---------------------------------------------------------------
+// ---------------------------------------------------------------
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
 using System.Text.Json.Serialization;
 using FailureAnalysis.Core.Api.Brokers;
+using FailureAnalysis.Core.Api.Brokers.Loggings;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Microsoft.OpenApi.Models;
 
@@ -58,8 +59,12 @@ namespace FailureAnalysis.Core.Api
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
-        private void AddBrokers(IServiceCollection services) =>
+        
+        private void AddBrokers(IServiceCollection services)
+        {
             services.AddTransient<IStorageBroker, StorageBroker>();
+            services.AddTransient<ILoggingBroker, LoggingBroker>();
+        }
 
         private void AddServices(IServiceCollection services) =>
             services.AddTransient<IFailureService, FailureService>();
