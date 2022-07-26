@@ -1,10 +1,11 @@
-﻿// ---------------------------------------------------------------
+// ---------------------------------------------------------------
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
 using System.Text.Json.Serialization;
 using FailureAnalysis.Core.Api.Brokers;
 using FailureAnalysis.Core.Api.Brokers.Loggings;
+using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Microsoft.OpenApi.Models;
 
 namespace FailureAnalysis.Core.Api
@@ -24,6 +25,7 @@ namespace FailureAnalysis.Core.Api
             services.AddLogging();
             services.AddDbContext<StorageBroker>();
             AddBrokers(services);
+            AddServices(services);
 
             services.AddSwaggerGen(option =>
             {
@@ -57,10 +59,14 @@ namespace FailureAnalysis.Core.Api
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
-        private void AddBrokers(IServiceCollection services)
+
+        private static void AddBrokers(IServiceCollection services)
         {
             services.AddTransient<IStorageBroker, StorageBroker>();
             services.AddTransient<ILoggingBroker, LoggingBroker>();
         }
+
+        private static void AddServices(IServiceCollection services) =>
+            services.AddTransient<IFailureService, FailureService>();
     }
 }
