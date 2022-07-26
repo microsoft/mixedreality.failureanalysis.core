@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using FailureAnalysis.Core.Api.Models.Failures;
+using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
@@ -21,10 +22,34 @@ namespace FailureAnalysis.Core.Api.Controllers
         [HttpPost]
         public async ValueTask<ActionResult<Failure>> PostFailureAsync(Failure failure)
         {
-            Failure addedFailure =
+            try
+            {
+                Failure addedFailure =
                 await this.failureService.AddFailureAsync(failure);
 
-            return Created(addedFailure);
+                return Created(addedFailure);
+            }
+            catch (FailureValidationException failureValidationException)
+            {
+                return BadRequest(failureValidationException.InnerException);
+            }
+            catch (FailureDependencyException failureDependencyException)
+            {
+                return InternalServerError(failureDependencyException);
+            }
+            catch (FailureDependencyValidationException failureDependencyValidationException)
+                when (failureDependencyValidationException.InnerException is AlreadyExistsFailureException)
+            {
+                return Conflict(failureDependencyValidationException.InnerException);
+            }
+            catch (FailureDependencyValidationException failureDependencyValidationException)
+            {
+                return BadRequest(failureDependencyValidationException.InnerException);
+            }
+            catch (FailureServiceException failureServiceException)
+            {
+                return InternalServerError(failureServiceException);
+            }
         }
     }
 }
