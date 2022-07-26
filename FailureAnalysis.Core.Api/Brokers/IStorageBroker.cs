@@ -4,7 +4,7 @@
 
 namespace FailureAnalysis.Core.Api.Brokers
 {
-    public interface IStorageBroker
+    public partial interface IStorageBroker
     {
     }
 }
