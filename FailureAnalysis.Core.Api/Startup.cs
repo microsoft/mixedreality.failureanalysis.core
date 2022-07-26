@@ -60,13 +60,13 @@ namespace FailureAnalysis.Core.Api
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
-        private void AddBrokers(IServiceCollection services)
+        private static void AddBrokers(IServiceCollection services)
         {
             services.AddTransient<IStorageBroker, StorageBroker>();
             services.AddTransient<ILoggingBroker, LoggingBroker>();
         }
 
-        private void AddServices(IServiceCollection services) =>
+        private static void AddServices(IServiceCollection services) =>
             services.AddTransient<IFailureService, FailureService>();
     }
 }
