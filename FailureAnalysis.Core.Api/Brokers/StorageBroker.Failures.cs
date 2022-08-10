@@ -49,6 +49,5 @@ namespace FailureAnalysis.Core.Api.Brokers
 
             return failureEntityEntry.Entity;
         }
-
     }
 }
