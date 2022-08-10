@@ -12,5 +12,6 @@ namespace FailureAnalysis.Core.Api.Brokers
         IQueryable<Failure> SelectAllFailures();
         ValueTask<Failure> SelectFailureByIdAsync(Guid id);
         ValueTask<Failure> UpdateFailureAsync(Failure failure);
+        ValueTask<Failure> DeleteFailureAsync(Failure failure);
     }
 }
