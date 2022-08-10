@@ -37,5 +37,18 @@ namespace FailureAnalysis.Core.Api.Brokers
 
             return await broker.Failures.FindAsync(failureId);
         }
+
+        public async ValueTask<Failure> UpdateFailureAsync(Failure failure)
+        {
+            var broker = new StorageBroker(this.configuration);
+
+            EntityEntry<Failure> failureEntityEntry =
+                broker.Failures.Update(entity: failure);
+
+            await broker.SaveChangesAsync();
+
+            return failureEntityEntry.Entity;
+        }
+
     }
 }
