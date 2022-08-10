@@ -30,5 +30,12 @@ namespace FailureAnalysis.Core.Api.Brokers
 
             return broker.Failures;
         }
+
+        public async ValueTask<Failure> SelectFailureByIdAsync(Guid failureId)
+        {
+            var broker = new StorageBroker(this.configuration);
+
+            return await broker.Failures.FindAsync(failureId);
+        }
     }
 }
