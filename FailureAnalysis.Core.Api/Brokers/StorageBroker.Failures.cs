@@ -23,5 +23,12 @@ namespace FailureAnalysis.Core.Api.Brokers
 
             return failureEntityEntry.Entity;
         }
+
+        public IQueryable<Failure> SelectAllFailures()
+        {
+            var broker = new StorageBroker(this.configuration);
+
+            return broker.Failures;
+        }
     }
 }
