@@ -10,5 +10,6 @@ namespace FailureAnalysis.Core.Api.Brokers
     {
         ValueTask<Failure> InsertFailureAsync(Failure failure);
         IQueryable<Failure> SelectAllFailures();
+        ValueTask<Failure> SelectFailureByIdAsync(Guid id);
     }
 }
