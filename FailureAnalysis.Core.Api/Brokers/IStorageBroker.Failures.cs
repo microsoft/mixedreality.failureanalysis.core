@@ -9,5 +9,6 @@ namespace FailureAnalysis.Core.Api.Brokers
     public partial interface IStorageBroker
     {
         ValueTask<Failure> InsertFailureAsync(Failure failure);
+        IQueryable<Failure> SelectAllFailures();
     }
 }
