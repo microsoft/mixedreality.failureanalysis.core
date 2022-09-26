@@ -2,6 +2,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
+using System;
+
 namespace FailureAnalysis.Core.Api.Brokers.Loggings
 {
     public interface ILoggingBroker

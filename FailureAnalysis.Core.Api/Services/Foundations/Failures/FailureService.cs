@@ -5,6 +5,7 @@
 using FailureAnalysis.Core.Api.Brokers;
 using FailureAnalysis.Core.Api.Brokers.Loggings;
 using FailureAnalysis.Core.Api.Models.Failures;
+using System.Threading.Tasks;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {

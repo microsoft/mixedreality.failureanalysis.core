@@ -4,6 +4,9 @@
 
 using EFxceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FailureAnalysis.Core.Api.Brokers
 {
