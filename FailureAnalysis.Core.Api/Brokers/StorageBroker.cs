@@ -23,6 +23,7 @@ namespace FailureAnalysis.Core.Api.Brokers
                 this.configuration.GetConnectionString("DefaultConnection");
 
             optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
 
         private async ValueTask<T> InsertAsync<T>(T @object)
