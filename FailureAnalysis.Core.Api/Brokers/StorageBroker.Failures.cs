@@ -2,12 +2,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-using FailureAnalysis.Core.Api.Models.Failures;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using FailureAnalysis.Core.Api.Models.Failures;
+using Microsoft.EntityFrameworkCore;
 
 namespace FailureAnalysis.Core.Api.Brokers
 {
@@ -15,42 +14,16 @@ namespace FailureAnalysis.Core.Api.Brokers
     {
         public DbSet<Failure> Failures { get; set; }
 
-        public async ValueTask<Failure> InsertFailureAsync(Failure failure)
-        {
-            var broker = new StorageBroker(this.configuration);
+        public async ValueTask<Failure> InsertFailureAsync(Failure failure) =>
+            await InsertAsync(failure);
 
-            EntityEntry<Failure> failureEntityEntry =
-                await broker.Failures.AddAsync(failure);
+        public IQueryable<Failure> SelectAllFailures() =>
+            SelectAll<Failure>();
 
-            await broker.SaveChangesAsync();
+        public async ValueTask<Failure> SelectFailureByIdAsync(Guid failureId) =>
+            await SelectAsync<Failure>(failureId);
 
-            return failureEntityEntry.Entity;
-        }
-
-        public IQueryable<Failure> SelectAllFailures()
-        {
-            var broker = new StorageBroker(this.configuration);
-
-            return broker.Failures;
-        }
-
-        public async ValueTask<Failure> SelectFailureByIdAsync(Guid failureId)
-        {
-            var broker = new StorageBroker(this.configuration);
-
-            return await broker.Failures.FindAsync(failureId);
-        }
-
-        public async ValueTask<Failure> UpdateFailureAsync(Failure failure)
-        {
-            var broker = new StorageBroker(this.configuration);
-
-            EntityEntry<Failure> failureEntityEntry =
-                broker.Failures.Update(entity: failure);
-
-            await broker.SaveChangesAsync();
-
-            return failureEntityEntry.Entity;
-        }
+        public async ValueTask<Failure> UpdateFailureAsync(Failure failure) =>
+            await UpdateAsync(failure);
     }
 }
