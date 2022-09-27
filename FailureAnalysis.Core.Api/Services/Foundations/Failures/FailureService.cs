@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ---------------------------------------------------------------
 
-using FailureAnalysis.Core.Api.Brokers;
-using FailureAnalysis.Core.Api.Brokers.Loggings;
-using FailureAnalysis.Core.Api.Models.Failures;
 using System.Threading.Tasks;
+using FailureAnalysis.Core.Api.Brokers.Loggings;
+using FailureAnalysis.Core.Api.Brokers.Storages;
+using FailureAnalysis.Core.Api.Models.Failures;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {

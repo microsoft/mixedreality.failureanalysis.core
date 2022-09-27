@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FailureAnalysis.Core.Api.Brokers
+namespace FailureAnalysis.Core.Api.Brokers.Storages
 {
     public partial interface IStorageBroker
     {
