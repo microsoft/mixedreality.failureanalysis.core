@@ -5,6 +5,9 @@
 using FailureAnalysis.Core.Api.Models.Failures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FailureAnalysis.Core.Api.Brokers
 {

@@ -4,6 +4,7 @@
 
 using FailureAnalysis.Core.Api.Models.Failures;
 using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
+using System;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {

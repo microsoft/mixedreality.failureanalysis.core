@@ -3,6 +3,9 @@
 // ---------------------------------------------------------------
 
 using FailureAnalysis.Core.Api.Models.Failures;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FailureAnalysis.Core.Api.Brokers
 {
