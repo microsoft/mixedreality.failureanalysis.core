@@ -25,5 +25,8 @@ namespace FailureAnalysis.Core.Api.Brokers.Storages
 
         public async ValueTask<Failure> UpdateFailureAsync(Failure failure) =>
             await UpdateAsync(failure);
+
+        public async ValueTask<Failure> DeleteFailureAsync(Failure failure) =>
+            await DeleteAsync(failure);
     }
 }
