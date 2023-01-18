@@ -3,9 +3,14 @@
 // ---------------------------------------------------------------
 
 using System.Text.Json.Serialization;
-using FailureAnalysis.Core.Api.Brokers;
 using FailureAnalysis.Core.Api.Brokers.Loggings;
+using FailureAnalysis.Core.Api.Brokers.Storages;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace FailureAnalysis.Core.Api

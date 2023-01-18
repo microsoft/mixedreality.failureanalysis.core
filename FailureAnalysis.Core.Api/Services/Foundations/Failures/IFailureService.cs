@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using FailureAnalysis.Core.Api.Models.Failures;
+using System.Threading.Tasks;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures
 {

@@ -7,6 +7,8 @@ using FailureAnalysis.Core.Api.Models.Failures;
 using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 using Xeptions;
 
 namespace FailureAnalysis.Core.Api.Services.Foundations.Failures

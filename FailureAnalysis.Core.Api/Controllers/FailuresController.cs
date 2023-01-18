@@ -7,6 +7,7 @@ using FailureAnalysis.Core.Api.Models.Failures.Exceptions;
 using FailureAnalysis.Core.Api.Services.Foundations.Failures;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
+using System.Threading.Tasks;
 
 namespace FailureAnalysis.Core.Api.Controllers
 {
