@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------
 
 using EFxceptions;
+using FailureAnalysis.Core.Api.Models.Failures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
@@ -18,16 +19,6 @@ namespace FailureAnalysis.Core.Api.Brokers.Storages
         {
             this.configuration = configuration;
             this.Database.Migrate();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-
-            string connectionString =
-                this.configuration.GetConnectionString("DefaultConnection");
-
-            optionsBuilder.UseSqlServer(connectionString);
         }
 
         private async ValueTask<T> InsertAsync<T>(T @object)
@@ -57,6 +48,16 @@ namespace FailureAnalysis.Core.Api.Brokers.Storages
             await this.SaveChangesAsync();
 
             return @object;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+            string connectionString =
+                this.configuration.GetConnectionString("DefaultConnection");
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }
