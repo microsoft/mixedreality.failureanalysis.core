@@ -22,9 +22,9 @@ namespace FailureAnalysis.Core.Api.Services.Foundations.ExternalFailures
             this.loggingBroker = logging;
         }
 
-        public ValueTask<ExternalFailure> CreateExternalFailureAsync(ExternalFailure externalFailure)
+        public async ValueTask<ExternalFailure> CreateExternalFailureAsync(ExternalFailure externalFailure)
         {
-            throw new System.NotImplementedException();
+            return await this.externalFailureBroker.CreateExternalFailureAsync(externalFailure);
         }
     }
 }
