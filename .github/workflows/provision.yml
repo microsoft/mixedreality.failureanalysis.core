@@ -1,0 +1,32 @@
+name: Provision Failure Analysis Core
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      AzureSubscriptionId: ${{ secrets.AZURE_SUBSCRIPTIONID }}
+      AzureTenantId: ${{ secrets.AZURE_TENANTID }}
+      AzureAdAppProvisionClientId: ${{ secrets.AZURE_ADAPP_PROVISION_CLIENTID }}
+      AzureAdAppProvisionClientSecret: ${{ secrets.AZURE_ADAPP_PROVISION_CLIENTSECRET }}
+      AzureSqlServerAdminName: ${{ secrets.AZURE_SQLSERVER_ADMINNAME }}
+      AzureSqlServerAdminAccess: ${{ secrets.AZURE_SQLSERVER_ADMINACCESS }}
+    steps:
+    - name: Checking out code
+      uses: actions/checkout@v2
+    - name: Setup Dot Net Version
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.101
+        include-prerelease: false
+    - name: Restoring Packages
+      run: dotnet restore
+    - name: Building Project(s)
+      run: dotnet build --no-restore
+    - name: Provision
+      run: dotnet run --project .\FailureAnalysis.Core.Api.Infrastructure.Provision\FailureAnalysis.Core.Api.Infrastructure.Provision.csproj
